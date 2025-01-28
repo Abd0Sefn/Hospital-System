@@ -1,6 +1,11 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+void ShowMenu(std :: vector <std:: string> options){
+    for(int i = 1; i <= (int)options.size(); ++i){
+        std :: cout << "    " << i << ". " << options[i] << "\n";
+    }
+}
 struct Full_name{
     std :: string f_name, middle_name, l_name;
     void display(){
@@ -19,6 +24,9 @@ enum Week_day{
 enum Gender{
     Male,
     Female
+};
+enum Specialization{
+    Neurology_clinic, Cardiology, Ear_Nose_Throat, Eyes, Orthopedic, Dental_clinic
 };
 struct User{
     Full_name name;
@@ -55,7 +63,7 @@ struct time_slot{
     }
 };
 struct Doctor : User{
-    std :: string specialization;
+    Specialization specialization;
     std :: vector <time_slot> schedules;
     void add_shedule(){} 
     void display(){
@@ -107,6 +115,7 @@ struct HospitalSystem{
     vector <Doctor> Doctors;
     vector <Patient> Patients;
 };
+
 int main(){
     HospitalSystem hospital;
 }
