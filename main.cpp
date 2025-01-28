@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include<algorithm>
 using namespace std;
 void ShowMenu(std :: vector <std:: string> options){
     for(int i = 1; i <= (int)options.size(); ++i){
@@ -52,14 +53,19 @@ struct Time{
     }
 };
 struct time_slot{
-    Time begin, end;
+    std :: vector<pair<Time, Time>> slots ;
     Week_day day;
     void display(){
-        std :: cout << "Day: " << day << " from " ;
-        begin.display();
-        std :: cout << " to ";
-        end.display();
-        std :: cout << "\n";
+        std :: cout << "Day: " << day << "\n" ;
+        for(auto slot : slots){
+            std :: cout << " from " ;
+            slot.first.display();
+            std :: cout << " to ";
+            slot.second.display();
+            std :: cout << "\n";
+
+        }
+        
     }
 };
 struct Doctor : User{
@@ -110,6 +116,14 @@ struct Patient : User{
 };
 struct PatientsManager{};
 struct DoctorsManagers{};
+struct Time_slot_Handler{
+    bool comp_slots(time_slot first, time_slot second){
+        return first.day < second.day;
+    }
+    void Handle(std :: vector <time_slot>* times){
+        sort(times->begin(), times->end(), comp_slots);
+    }
+};
 struct AppointmentSchedular{};
 struct HospitalSystem{
     vector <Doctor> Doctors;
